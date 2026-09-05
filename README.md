@@ -4,7 +4,7 @@
 
 <p align="center">
   <!-- <strong>AI Engineer &amp; Researcher</strong><br> --!>
-  Computer Engineer and Engineering Manager at Leonardo<br>
+  Computer Engineer and Engineering Proposal Manager at Leonardo<br>
   working on AI & Digital Transformation
 </p>
 
