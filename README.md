@@ -37,7 +37,7 @@ I work at the intersection of Artificial Intelligence, engineering, and business
 
 ### Elsewhere
 
-You can connect with me on [LinkedIn](https://www.linkedin.com/in/enricocastrechini).
+Personal website in construction. You can connect with me on [LinkedIn](https://www.linkedin.com/in/enricocastrechini).
 
 <!--
 
