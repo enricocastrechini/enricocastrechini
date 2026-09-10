@@ -26,7 +26,7 @@
 
 ### About me
 
-I work at the intersection of Artificial Intelligence, engineering, and business strategy. I am fascinated by how complex behaviors emerge from simple models, and I enjoy translating that technological potential into practical, high-impact solutions.
+I work at the intersection of *Artificial Intelligence*, *Engineering*, and *Business Strategy*. I am fascinated by how complex behaviors emerge from simple models, and I enjoy translating that technological potential into practical, high-impact solutions.
 
 - 🤖 Exploring Generative AI: Driving the adoption of GenAI, agent-based solutions, and AI-powered workflows in engineering.
 - 🚀 Shaping Aerospace Solutions: Managing complex international engineering proposals, aligning technical requirements with strategic execution.
