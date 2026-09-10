@@ -1,3 +1,12 @@
+<table align="center" width="100%" cellpadding="12" cellspacing="0" border="1" bordercolor="#30363d">
+<tr>
+<td align="center" bgcolor="#0d1117">
+<img src="https://raw.githubusercontent.com/enricocastrechini/enricocastrechini/main/assets/workinprogress.gif" width="100%" alt="AI work in progress">
+<br>
+</td>
+</tr>
+</table>
+
 ## Hi there 👋
 
 <br>
