@@ -7,8 +7,9 @@
 </tr>
 </table>
 
+<p align="center">
 ## Hi there 👋
-
+</p>  
 <br>
 
 <p align="center">
