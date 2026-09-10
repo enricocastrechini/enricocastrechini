@@ -28,10 +28,10 @@
 
 I work at the intersection of Artificial Intelligence, engineering, and business strategy. I am fascinated by how complex behaviors emerge from simple models, and I enjoy translating that technological potential into practical, high-impact solutions.
 
-🤖 Exploring Generative AI: Driving the adoption of GenAI, agent-based solutions, and AI-powered workflows in engineering.
-🚀 Shaping Aerospace Solutions: Managing complex international engineering proposals, aligning technical requirements with strategic execution.
-💼 Bridging Tech & Business: Leveraging a background in AI, Engineering, and Advanced Management to connect tech decisions with business goals.
-🔬 Academic Roots: Dual MSc in Computer Engineering with research experience in deep learning for medical imaging.
+- 🤖 Exploring Generative AI: Driving the adoption of GenAI, agent-based solutions, and AI-powered workflows in engineering.
+- 🚀 Shaping Aerospace Solutions: Managing complex international engineering proposals, aligning technical requirements with strategic execution.
+- 💼 Bridging Tech & Business: Leveraging a background in AI, Engineering, and Advanced Management to connect tech decisions with business goals.
+- 🔬 Academic Roots: Dual MSc in Computer Engineering with research experience in deep learning for medical imaging.
 
 ---
 
