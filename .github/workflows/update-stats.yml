@@ -17,7 +17,6 @@ concurrency:
 
 env:
   USERNAME: enricocastrechini
-  METRICS_TOKEN: ${{ secrets.PAT_1 != '' && secrets.PAT_1 || github.token }}
 
 jobs:
   generate:
@@ -32,7 +31,7 @@ jobs:
         uses: lowlighter/metrics@latest
         with:
           filename: assets/github-analytics/overview.svg
-          token: ${{ env.METRICS_TOKEN }}
+          token: ${{ secrets.PAT_1 || github.token }}
           user: ${{ env.USERNAME }}
           base: header, activity, community, repositories, metadata
           config_timezone: UTC
@@ -40,23 +39,18 @@ jobs:
           output_action: none
 
       - name: Generate GitHub streak snapshot
-        uses: lowlighter/metrics@latest
+        uses: DenverCoder1/github-readme-streak-stats@v1
         with:
-          filename: assets/github-analytics/streak.svg
-          token: ${{ env.METRICS_TOKEN }}
-          user: ${{ env.USERNAME }}
-          base: ""
-          plugin_isocalendar: yes
-          plugin_isocalendar_duration: half-year
-          config_timezone: UTC
-          plugins_errors_fatal: yes
-          output_action: none
+          path: assets/github-analytics/streak.svg
+          token: ${{ secrets.PAT_1 || github.token }}
+          options: >-
+            ?user=enricocastrechini&theme=tokyonight&hide_border=true&date_format=j%20M%5B%20Y%5D
 
       - name: Generate top languages snapshot
         uses: lowlighter/metrics@latest
         with:
           filename: assets/github-analytics/languages.svg
-          token: ${{ env.METRICS_TOKEN }}
+          token: ${{ secrets.PAT_1 || github.token }}
           user: ${{ env.USERNAME }}
           base: ""
           plugin_languages: yes
@@ -66,18 +60,15 @@ jobs:
           plugins_errors_fatal: yes
           output_action: none
 
-      - name: Generate activity charts snapshot
+      - name: Generate contribution activity calendar
         uses: lowlighter/metrics@latest
         with:
           filename: assets/github-analytics/activity.svg
-          token: ${{ env.METRICS_TOKEN }}
+          token: ${{ secrets.PAT_1 || github.token }}
           user: ${{ env.USERNAME }}
           base: ""
-          plugin_habits: yes
-          plugin_habits_days: 30
-          plugin_habits_facts: no
-          plugin_habits_charts: yes
-          plugin_habits_charts_type: graph
+          plugin_isocalendar: yes
+          plugin_isocalendar_duration: full-year
           config_timezone: UTC
           plugins_errors_fatal: yes
           output_action: none
