@@ -141,13 +141,6 @@ class SvgRenderingTests(unittest.TestCase):
         ET.fromstring(svg)
 
     def test_trophies_svg_includes_profile_milestones(self):
-        contrib = {
-            'total': 40,
-            'current_streak': 1,
-            'longest_streak': 1,
-            'active_days': 4,
-            'peak_day': 17,
-        }
         profile = {
             'followers': 1,
             'public_repos': 2,
@@ -156,7 +149,7 @@ class SvgRenderingTests(unittest.TestCase):
             'closed_issues': 0,
             'years_active': 1,
         }
-        svg = module.trophies_svg(profile, contrib)
+        svg = module.trophies_svg(profile)
         self.assertIn('Profile Milestones', svg)
         self.assertIn('width="960"', svg)
         self.assertIn('viewBox="0 0 960 320"', svg)

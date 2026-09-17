@@ -459,7 +459,7 @@ def activity_svg(contrib: dict) -> str:
     return svg_wrap(width, 400, '\n'.join(body))
 
 
-def trophies_svg(profile: dict, contrib: dict) -> str:
+def trophies_svg(profile: dict) -> str:
     width = 960
     padding = 32
     column_gap = 24
@@ -538,7 +538,7 @@ def pinned_repos_svg(repositories: list[dict]) -> str:
 def write_assets(contrib: dict, profile: dict, pinned: list[dict]) -> None:
     (OUT / 'streak.svg').write_text(streak_svg(contrib), encoding='utf-8')
     (OUT / 'activity.svg').write_text(activity_svg(contrib), encoding='utf-8')
-    (OUT / 'trophies.svg').write_text(trophies_svg(profile, contrib), encoding='utf-8')
+    (OUT / 'trophies.svg').write_text(trophies_svg(profile), encoding='utf-8')
     (OUT / 'pinned-repos.svg').write_text(pinned_repos_svg(pinned), encoding='utf-8')
 
 
