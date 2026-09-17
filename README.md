@@ -45,7 +45,8 @@
 </p>
 
 <p align="center">
-  Explore my <a href="https://github.com/enricocastrechini">GitHub profile</a> and <a href="https://github.com/enricocastrechini?tab=repositories">public repositories</a> for a text-accessible view of these highlights.
+  These summary cards are served by <a href="https://github.com/anuraghazra/github-readme-stats">GitHub Readme Stats</a>.<br>
+  For a first-party, text-accessible view, visit my <a href="https://github.com/enricocastrechini">GitHub profile</a> and <a href="https://github.com/enricocastrechini?tab=repositories">public repositories</a>.
 </p>
 
 ---
