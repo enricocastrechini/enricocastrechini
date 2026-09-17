@@ -28,7 +28,7 @@ jobs:
           fetch-depth: 0
 
       - name: Generate GitHub stats overview
-        uses: lowlighter/metrics@latest
+        uses: lowlighter/metrics@366f8b9dfe3a59656c67d5dcad9950f59c9bc96d
         with:
           filename: assets/github-analytics/overview.svg
           token: ${{ secrets.PAT_1 || github.token }}
@@ -38,16 +38,11 @@ jobs:
           plugins_errors_fatal: yes
           output_action: none
 
-      - name: Generate GitHub streak snapshot
-        uses: DenverCoder1/github-readme-streak-stats@v1
-        with:
-          path: assets/github-analytics/streak.svg
-          token: ${{ secrets.PAT_1 || github.token }}
-          options: >-
-            ?user=enricocastrechini&theme=tokyonight&hide_border=true&date_format=j%20M%5B%20Y%5D
+      - name: Generate local streak and activity snapshots
+        run: python .github/scripts/generate_github_analytics.py
 
       - name: Generate top languages snapshot
-        uses: lowlighter/metrics@latest
+        uses: lowlighter/metrics@366f8b9dfe3a59656c67d5dcad9950f59c9bc96d
         with:
           filename: assets/github-analytics/languages.svg
           token: ${{ secrets.PAT_1 || github.token }}
@@ -57,19 +52,6 @@ jobs:
           plugin_languages_limit: 8
           plugin_languages_other: yes
           plugin_languages_details: bytes-size, percentage
-          plugins_errors_fatal: yes
-          output_action: none
-
-      - name: Generate contribution activity calendar
-        uses: lowlighter/metrics@latest
-        with:
-          filename: assets/github-analytics/activity.svg
-          token: ${{ secrets.PAT_1 || github.token }}
-          user: ${{ env.USERNAME }}
-          base: ""
-          plugin_isocalendar: yes
-          plugin_isocalendar_duration: full-year
-          config_timezone: UTC
           plugins_errors_fatal: yes
           output_action: none
 
