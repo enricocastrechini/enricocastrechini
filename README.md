@@ -40,6 +40,8 @@ I work at the intersection of **Artificial Intelligence**, **engineering**, and 
 
 ## 📊 GitHub Analytics
 
+<!--  
+
 <p align="center">
   <img src="./assets/github-analytics/overview.svg" width="49%" alt="GitHub stats overview"/>
   <img src="./assets/github-analytics/streak.svg" width="49%" alt="GitHub streak stats snapshot"/>
@@ -49,7 +51,7 @@ I work at the intersection of **Artificial Intelligence**, **engineering**, and 
   <img src="./assets/github-analytics/languages.svg" width="49%" alt="Top languages snapshot"/>
   <img src="./assets/github-analytics/activity.svg" width="49%" alt="Contribution activity calendar snapshot"/>
 </p>
-
+-->
 <details>
 <summary>🏆 GitHub Trophies</summary>
 <br>
