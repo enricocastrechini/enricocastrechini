@@ -444,7 +444,7 @@ def trophies_svg(profile: dict, contrib: dict) -> str:
     ]
     body = [
         text(24, 34, 'Profile Milestones', 22, weight='700'),
-        text(24, 58, f"{format_compact(profile['total_stars'])} stars • {profile['closed_issues']} closed issues • active since {profile['years_active']} year{'s' if profile['years_active'] != 1 else ''}", 12, MUTED),
+        text(24, 58, f"{format_compact(profile['total_stars'])} stars • {format_compact(profile['closed_issues'])} closed issues • active since {profile['years_active']} year{'s' if profile['years_active'] != 1 else ''}", 12, MUTED),
     ]
     for index, (label, value, subtitle, color) in enumerate(trophies):
         x = 24 + (index % 3) * 184
