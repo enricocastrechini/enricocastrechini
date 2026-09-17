@@ -35,12 +35,21 @@ def plural(value: int, unit: str) -> str:
 
 
 def extract_contribution_days(html_text: str) -> list[tuple[date, int]]:
-    day_ids = re.findall(r'<td[^>]*data-date="([0-9-]+)"[^>]*id="([^"]+)"[^>]*class="ContributionCalendar-day"', html_text, re.S)
+    day_ids = []
+    for tag in re.findall(r'<td\b[^>]*class="ContributionCalendar-day"[^>]*>', html_text, re.S):
+        date_match = re.search(r'data-date="([0-9-]+)"', tag)
+        id_match = re.search(r'id="([^"]+)"', tag)
+        if date_match and id_match:
+            day_ids.append((date_match.group(1), id_match.group(1)))
+
     tooltip_counts = {}
-    for day_id, label in re.findall(r'<tool-tip[^>]*for="([^"]+)"[^>]*>([^<]+)</tool-tip>', html_text, re.S):
+    for tag, label in re.findall(r'(<tool-tip\b[^>]*>)([^<]+)</tool-tip>', html_text, re.S):
+        id_match = re.search(r'for="([^"]+)"', tag)
+        if not id_match:
+            continue
         label = html.unescape(label.strip())
         match = re.match(r'([0-9,]+) contributions? on ', label)
-        tooltip_counts[day_id] = int(match.group(1).replace(',', '')) if match else 0
+        tooltip_counts[id_match.group(1)] = int(match.group(1).replace(',', '')) if match else 0
 
     days = []
     for day_str, day_id in day_ids:
@@ -153,9 +162,8 @@ def activity_svg(contrib):
     body = [text(24, 34, 'Contribution Activity Snapshot', 22, weight='700'), text(24, 58, 'Last 365 days of public contributions', 12, MUTED)]
     month_positions = {}
     for day, _ in days:
-        if day.day <= 7:
-            col = (day - start_sunday).days // 7
-            month_positions.setdefault(day.strftime('%Y-%m'), (day.strftime('%b'), col))
+        col = (day - start_sunday).days // 7
+        month_positions.setdefault(day.strftime('%Y-%m'), (day.strftime('%b'), col))
     for month, col in list(month_positions.values())[:12]:
         x = min(576, x0 + col * (cell + gap))
         body.append(text(x, 78, month, 10, MUTED))

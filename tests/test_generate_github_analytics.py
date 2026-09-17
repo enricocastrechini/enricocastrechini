@@ -31,6 +31,13 @@ class ExtractContributionDaysTests(unittest.TestCase):
             ],
         )
 
+    def test_handles_attributes_in_different_order(self):
+        html = '''
+        <td id="contribution-day-component-0-1" class="ContributionCalendar-day" data-date="2026-09-17"></td>
+        <tool-tip class="sr-only position-absolute" for="contribution-day-component-0-1">2 contributions on September 17th.</tool-tip>
+        '''
+        self.assertEqual(module.extract_contribution_days(html), [(module.date(2026, 9, 17), 2)])
+
     def test_missing_tooltip_defaults_to_zero(self):
         html = '''
         <td data-date="2026-09-17" id="contribution-day-component-0-1" class="ContributionCalendar-day"></td>
