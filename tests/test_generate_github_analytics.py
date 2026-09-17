@@ -95,7 +95,7 @@ class SvgRenderingTests(unittest.TestCase):
         contrib = {
             'total': 40,
             'current_streak': 1,
-            'longest_streak': 3,
+            'longest_streak': 1,
             'active_days': 4,
             'peak_day': 17,
         }
@@ -105,13 +105,13 @@ class SvgRenderingTests(unittest.TestCase):
             'total_stars': 0,
             'merged_prs': 3,
             'closed_issues': 0,
-            'years_active': 2,
+            'years_active': 1,
         }
         svg = module.trophies_svg(profile, contrib)
         self.assertIn('Profile Milestones', svg)
-        self.assertIn('Merged PRs', svg)
+        self.assertIn('Authored PRs', svg)
         self.assertIn('40', svg)
-        self.assertIn('active since 2 years', svg)
+        self.assertIn('active since 1 year', svg)
 
     def test_pinned_repos_svg_includes_repository_metadata(self):
         svg = module.pinned_repos_svg(

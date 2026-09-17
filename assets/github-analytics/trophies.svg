@@ -9,7 +9,7 @@
 </defs>
 <rect width="100%" height="100%" rx="18" fill="url(#bg)"/>
 <text x="24" y="34" fill="#c0caf5" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700" text-anchor="start">Profile Milestones</text>
-<text x="24" y="58" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" text-anchor="start">0 stars • 0 closed issues • active since 1 year</text>
+<text x="24" y="58" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" text-anchor="start">0 stars • 0 authored issues closed • active since 1 year</text>
 <rect x="24" y="88" width="168" height="92" rx="14" fill="#24283b" stroke="#2f3549"/>
 <circle cx="48" cy="112" r="8" fill="#7aa2f7"/>
 <text x="64" y="117" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="600" text-anchor="start">Contributions</text>
@@ -37,9 +37,9 @@
 <text x="226" y="280" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" text-anchor="start">GitHub audience</text>
 <rect x="392" y="200" width="168" height="92" rx="14" fill="#24283b" stroke="#2f3549"/>
 <circle cx="416" cy="224" r="8" fill="#9ece6a"/>
-<text x="432" y="229" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="600" text-anchor="start">Merged PRs</text>
+<text x="432" y="229" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="600" text-anchor="start">Authored PRs</text>
 <text x="410" y="260" fill="#9ece6a" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700" text-anchor="start">3</text>
-<text x="410" y="280" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" text-anchor="start">authored and merged</text>
+<text x="410" y="280" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" text-anchor="start">merged across GitHub</text>
 <rect x="24" y="318" width="552" height="38" rx="12" fill="#24283b" stroke="#2f3549"/>
 <text x="42" y="343" fill="#c0caf5" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="600" text-anchor="start">Current streak 1 • Peak day 17 contributions</text>
 </svg>

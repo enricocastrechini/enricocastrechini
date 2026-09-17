@@ -454,11 +454,11 @@ def trophies_svg(profile: dict, contrib: dict) -> str:
         ('Active days', format_compact(contrib['active_days']), 'days with activity', ACCENT3),
         ('Public repos', format_compact(profile['public_repos']), 'owned repositories', ACCENT4),
         ('Followers', format_compact(profile['followers']), 'GitHub audience', '#e0af68'),
-        ('Merged PRs', format_compact(profile['merged_prs']), 'authored and merged', '#9ece6a'),
+        ('Authored PRs', format_compact(profile['merged_prs']), 'merged across GitHub', '#9ece6a'),
     ]
     body = [
         text(24, 34, 'Profile Milestones', 22, weight='700'),
-        text(24, 58, f"{format_compact(profile['total_stars'])} stars • {format_compact(profile['closed_issues'])} closed issues • active since {format_years_active(profile['years_active'])}", 12, MUTED),
+        text(24, 58, f"{format_compact(profile['total_stars'])} stars • {format_compact(profile['closed_issues'])} authored issues closed • active since {format_years_active(profile['years_active'])}", 12, MUTED),
     ]
     for index, (label, value, subtitle, color) in enumerate(trophies):
         x = 24 + (index % 3) * 184
@@ -519,10 +519,10 @@ def pinned_repos_svg(repositories: list[dict]) -> str:
 
 
 def write_assets(contrib: dict, profile: dict, pinned: list[dict]) -> None:
-    (OUT / 'streak.svg').write_text(streak_svg(contrib))
-    (OUT / 'activity.svg').write_text(activity_svg(contrib))
-    (OUT / 'trophies.svg').write_text(trophies_svg(profile, contrib))
-    (OUT / 'pinned-repos.svg').write_text(pinned_repos_svg(pinned))
+    (OUT / 'streak.svg').write_text(streak_svg(contrib), encoding='utf-8')
+    (OUT / 'activity.svg').write_text(activity_svg(contrib), encoding='utf-8')
+    (OUT / 'trophies.svg').write_text(trophies_svg(profile, contrib), encoding='utf-8')
+    (OUT / 'pinned-repos.svg').write_text(pinned_repos_svg(pinned), encoding='utf-8')
 
 
 def main() -> None:
