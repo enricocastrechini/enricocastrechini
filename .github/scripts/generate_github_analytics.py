@@ -53,10 +53,17 @@ def summarize_contributions(days: list[tuple[date, int]], start: date, end: date
     if not days:
         raise RuntimeError('Could not parse any contribution days from the GitHub contributions page.')
 
-    total = sum(count for _, count in days)
-    if days[-1][1] > 0:
+    counts_by_day = {day: count for day, count in days}
+    full_days = []
+    cursor = start
+    while cursor <= end:
+        full_days.append((cursor, counts_by_day.get(cursor, 0)))
+        cursor += timedelta(days=1)
+
+    total = sum(count for _, count in full_days)
+    if full_days[-1][1] > 0:
         current = 0
-        for _, count in reversed(days):
+        for _, count in reversed(full_days):
             if count > 0:
                 current += 1
             else:
@@ -67,7 +74,7 @@ def summarize_contributions(days: list[tuple[date, int]], start: date, end: date
     longest = 0
     running = 0
     best_end = None
-    for day, count in days:
+    for day, count in full_days:
         if count > 0:
             running += 1
             if running > longest:
@@ -76,10 +83,10 @@ def summarize_contributions(days: list[tuple[date, int]], start: date, end: date
         else:
             running = 0
 
-    active_days = sum(1 for _, count in days if count > 0)
-    peak = max((count for _, count in days), default=0)
+    active_days = sum(1 for _, count in full_days if count > 0)
+    peak = max((count for _, count in full_days), default=0)
     return {
-        'days': days,
+        'days': full_days,
         'range_label': f'{start.isoformat()} → {end.isoformat()}',
         'total': total,
         'current_streak': current,
@@ -148,8 +155,8 @@ def activity_svg(contrib):
     for day, _ in days:
         if day.day <= 7:
             col = (day - start_sunday).days // 7
-            month_positions.setdefault(day.strftime('%b'), col)
-    for month, col in list(month_positions.items())[:12]:
+            month_positions.setdefault(day.strftime('%Y-%m'), (day.strftime('%b'), col))
+    for month, col in list(month_positions.values())[:12]:
         x = min(576, x0 + col * (cell + gap))
         body.append(text(x, 78, month, 10, MUTED))
     for idx, label in zip([0, 2, 4], ['Sun', 'Tue', 'Thu']):

@@ -62,6 +62,15 @@ class SummarizeContributionTests(unittest.TestCase):
         self.assertEqual(summary['longest_streak'], 2)
         self.assertTrue(summary['current_longest_is_ongoing'])
 
+    def test_missing_end_date_is_treated_as_zero_contributions(self):
+        days = [
+            (module.date(2026, 9, 15), 2),
+            (module.date(2026, 9, 16), 1),
+        ]
+        summary = module.summarize_contributions(days, module.date(2026, 9, 15), module.date(2026, 9, 17))
+        self.assertEqual(summary['current_streak'], 0)
+        self.assertEqual(summary['days'][-1], (module.date(2026, 9, 17), 0))
+
 
 if __name__ == '__main__':
     unittest.main()
