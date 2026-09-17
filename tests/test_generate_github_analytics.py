@@ -38,5 +38,30 @@ class ExtractContributionDaysTests(unittest.TestCase):
         self.assertEqual(module.extract_contribution_days(html), [(module.date(2026, 9, 17), 0)])
 
 
+class SummarizeContributionTests(unittest.TestCase):
+    def test_current_streak_is_zero_when_latest_day_has_no_contributions(self):
+        days = [
+            (module.date(2026, 9, 15), 2),
+            (module.date(2026, 9, 16), 1),
+            (module.date(2026, 9, 17), 0),
+        ]
+        summary = module.summarize_contributions(days, module.date(2026, 9, 15), module.date(2026, 9, 17))
+        self.assertEqual(summary['current_streak'], 0)
+        self.assertEqual(summary['longest_streak'], 2)
+        self.assertEqual(summary['best_end'], module.date(2026, 9, 16))
+        self.assertFalse(summary['current_longest_is_ongoing'])
+
+    def test_current_longest_streak_is_marked_ongoing(self):
+        days = [
+            (module.date(2026, 9, 15), 0),
+            (module.date(2026, 9, 16), 1),
+            (module.date(2026, 9, 17), 4),
+        ]
+        summary = module.summarize_contributions(days, module.date(2026, 9, 15), module.date(2026, 9, 17))
+        self.assertEqual(summary['current_streak'], 2)
+        self.assertEqual(summary['longest_streak'], 2)
+        self.assertTrue(summary['current_longest_is_ongoing'])
+
+
 if __name__ == '__main__':
     unittest.main()

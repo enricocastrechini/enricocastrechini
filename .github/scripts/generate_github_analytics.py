@@ -49,21 +49,20 @@ def extract_contribution_days(html_text: str) -> list[tuple[date, int]]:
     return days
 
 
-def parse_contributions() -> dict:
-    today = date.today()
-    start = today - timedelta(days=364)
-    html_text = fetch(f'https://github.com/users/{USERNAME}/contributions?from={start.isoformat()}&to={today.isoformat()}')
-    days = extract_contribution_days(html_text)
+def summarize_contributions(days: list[tuple[date, int]], start: date, end: date) -> dict:
     if not days:
         raise RuntimeError('Could not parse any contribution days from the GitHub contributions page.')
 
     total = sum(count for _, count in days)
-    current = 0
-    for _, count in reversed(days):
-        if count > 0:
-            current += 1
-        elif current:
-            break
+    if days[-1][1] > 0:
+        current = 0
+        for _, count in reversed(days):
+            if count > 0:
+                current += 1
+            else:
+                break
+    else:
+        current = 0
 
     longest = 0
     running = 0
@@ -77,20 +76,27 @@ def parse_contributions() -> dict:
         else:
             running = 0
 
-    current_longest_is_ongoing = bool(current and current == longest)
     active_days = sum(1 for _, count in days if count > 0)
     peak = max((count for _, count in days), default=0)
     return {
         'days': days,
-        'range_label': f'{start.isoformat()} → {today.isoformat()}',
+        'range_label': f'{start.isoformat()} → {end.isoformat()}',
         'total': total,
         'current_streak': current,
         'longest_streak': longest,
         'active_days': active_days,
         'peak_day': peak,
         'best_end': best_end,
-        'current_longest_is_ongoing': current_longest_is_ongoing,
+        'current_longest_is_ongoing': bool(current and current == longest),
     }
+
+
+def parse_contributions() -> dict:
+    today = date.today()
+    start = today - timedelta(days=364)
+    html_text = fetch(f'https://github.com/users/{USERNAME}/contributions?from={start.isoformat()}&to={today.isoformat()}')
+    days = extract_contribution_days(html_text)
+    return summarize_contributions(days, start, today)
 
 
 def svg_wrap(width: int, height: int, body: str) -> str:
