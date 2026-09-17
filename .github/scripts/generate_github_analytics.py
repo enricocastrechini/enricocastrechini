@@ -2,8 +2,7 @@ from __future__ import annotations
 
 import html
 import re
-from collections import Counter
-from datetime import date, datetime, timedelta, timezone
+from datetime import date, datetime, timedelta
 from pathlib import Path
 from urllib.request import Request, urlopen
 
@@ -39,18 +38,22 @@ def parse_contributions() -> dict:
     today = date.today()
     start = today - timedelta(days=364)
     html_text = fetch(f'https://github.com/users/{USERNAME}/contributions?from={start.isoformat()}&to={today.isoformat()}')
-    year_total_match = re.search(r'<h2[^>]*>\s*([0-9,]+)\s+contributions\s+in\s+([0-9]{4})\s*</h2>', html_text, re.S)
-    year_total = int(year_total_match.group(1).replace(',', '')) if year_total_match else 0
-    year = year_total_match.group(2) if year_total_match else str(today.year)
-    entries = re.findall(r'data-date="([0-9-]+)"[^>]*class="ContributionCalendar-day".*?</td>\s*<tool-tip[^>]*class="sr-only position-absolute">([^<]+)</tool-tip>', html_text, re.S)
-    days = []
-    for d, label in entries:
-        label = html.unescape(label.strip())
-        m = re.match(r'([0-9,]+) contributions? on ', label)
-        count = int(m.group(1).replace(',', '')) if m else 0
-        days.append((datetime.strptime(d, '%Y-%m-%d').date(), count))
-    days.sort()
 
+    day_ids = re.findall(r'<td[^>]*data-date="([0-9-]+)"[^>]*id="([^"]+)"[^>]*class="ContributionCalendar-day"', html_text, re.S)
+    tooltip_counts = {}
+    for day_id, label in re.findall(r'<tool-tip[^>]*for="([^"]+)"[^>]*>([^<]+)</tool-tip>', html_text, re.S):
+        label = html.unescape(label.strip())
+        match = re.match(r'([0-9,]+) contributions? on ', label)
+        tooltip_counts[day_id] = int(match.group(1).replace(',', '')) if match else 0
+
+    days = []
+    for day_str, day_id in day_ids:
+        days.append((datetime.strptime(day_str, '%Y-%m-%d').date(), tooltip_counts.get(day_id, 0)))
+    days.sort()
+    if not days:
+        raise RuntimeError('Could not parse any contribution days from the GitHub contributions page.')
+
+    total = sum(count for _, count in days)
     current = 0
     for _, count in reversed(days):
         if count > 0:
@@ -61,21 +64,21 @@ def parse_contributions() -> dict:
     longest = 0
     running = 0
     best_end = None
-    for d, count in days:
+    for day, count in days:
         if count > 0:
             running += 1
             if running > longest:
                 longest = running
-                best_end = d
+                best_end = day
         else:
             running = 0
 
-    active_days = sum(1 for _, c in days if c > 0)
-    peak = max((c for _, c in days), default=0)
+    active_days = sum(1 for _, count in days if count > 0)
+    peak = max((count for _, count in days), default=0)
     return {
         'days': days,
-        'year_total': year_total,
-        'year': year,
+        'range_label': f'{start.isoformat()} → {today.isoformat()}',
+        'total': total,
         'current_streak': current,
         'longest_streak': longest,
         'active_days': active_days,
@@ -113,14 +116,14 @@ def streak_svg(contrib):
         body.append(text(x + 18, y + 30, label, 13, MUTED, '600'))
         body.append(text(x + 18, y + 60, value, 24, [ACCENT, ACCENT2, ACCENT3, ACCENT4][i], '700'))
     body.append(f'<rect x="24" y="308" width="552" height="48" rx="14" fill="{CARD}" stroke="{GRID}"/>')
-    body.append(text(42, 338, f"{contrib['year_total']} contributions recorded in {contrib['year']}", 16, TEXT, '600'))
-    body.append(text(576, 338, 'Source: public contribution calendar', 11, MUTED, '400', 'end'))
+    body.append(text(42, 338, f"{contrib['total']} contributions in the last 365 days", 16, TEXT, '600'))
+    body.append(text(576, 338, contrib['range_label'], 11, MUTED, '400', 'end'))
     return svg_wrap(600, 400, '\n'.join(body))
 
 
 def activity_svg(contrib):
     days = contrib['days']
-    min_date = min(d for d, _ in days)
+    min_date = min(day for day, _ in days)
     start_sunday = min_date - timedelta(days=(min_date.weekday() + 1) % 7)
     cell = 8
     gap = 2
@@ -128,18 +131,18 @@ def activity_svg(contrib):
     y0 = 86
     body = [text(24, 34, 'Contribution Activity Snapshot', 22, weight='700'), text(24, 58, 'Last 365 days of public contributions', 12, MUTED)]
     month_positions = {}
-    for d, _ in days:
-        if d.day <= 7:
-            col = (d - start_sunday).days // 7
-            month_positions.setdefault(d.strftime('%b'), col)
+    for day, _ in days:
+        if day.day <= 7:
+            col = (day - start_sunday).days // 7
+            month_positions.setdefault(day.strftime('%b'), col)
     for month, col in list(month_positions.items())[:12]:
         x = min(576, x0 + col * (cell + gap))
         body.append(text(x, 78, month, 10, MUTED))
     for idx, label in zip([0, 2, 4], ['Sun', 'Tue', 'Thu']):
         body.append(text(4, y0 + idx * (cell + gap) + 8, label, 10, MUTED))
-    for d, count in days:
-        col = (d - start_sunday).days // 7
-        row = (d.weekday() + 1) % 7
+    for day, count in days:
+        col = (day - start_sunday).days // 7
+        row = (day.weekday() + 1) % 7
         level = 0 if count == 0 else 1 if count < 2 else 2 if count < 4 else 3 if count < 7 else 4
         x = x0 + col * (cell + gap)
         y = y0 + row * (cell + gap)
@@ -149,7 +152,7 @@ def activity_svg(contrib):
     for i, color in enumerate(LEVELS):
         body.append(f'<rect x="{legend_x + 28 + i * 14}" y="355" width="10" height="10" rx="2" fill="{color}"/>')
     body.append(text(legend_x + 110, 364, 'More', 10, MUTED))
-    body.append(text(24, 386, f"Current streak {contrib['current_streak']} • Longest streak {contrib['longest_streak']} • Peak day {contrib['peak_day']} contributions", 11, MUTED))
+    body.append(text(24, 386, f"Current streak {contrib['current_streak']} • Longest streak {contrib['longest_streak']} • {contrib['range_label']}", 11, MUTED))
     return svg_wrap(600, 400, '\n'.join(body))
 
 
