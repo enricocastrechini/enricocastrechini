@@ -1,0 +1,87 @@
+name: Update GitHub analytics snapshots
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'assets/github-analytics/**'
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-github-analytics-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  USERNAME: enricocastrechini
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.ref_name }}
+
+      - name: Run generator unit tests
+        run: python -m unittest discover -s tests -p 'test_*.py'
+
+      - name: Select metrics token
+        id: metrics-token
+        env:
+          PAT_1: ${{ secrets.PAT_1 }}
+          FALLBACK_TOKEN: ${{ github.token }}
+        run: |
+          if [ -n "$PAT_1" ]; then
+            printf 'value=%s\n' "$PAT_1" >> "$GITHUB_OUTPUT"
+          else
+            printf 'value=%s\n' "$FALLBACK_TOKEN" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Generate GitHub stats overview
+        uses: lowlighter/metrics@366f8b9dfe3a59656c67d5dcad9950f59c9bc96d
+        with:
+          filename: assets/github-analytics/overview.svg
+          token: ${{ steps.metrics-token.outputs.value }}
+          user: ${{ env.USERNAME }}
+          base: header, activity, community, repositories, metadata
+          config_timezone: UTC
+          plugins_errors_fatal: yes
+          output_action: none
+
+      - name: Generate local streak and activity snapshots
+        run: python .github/scripts/generate_github_analytics.py
+
+      - name: Generate top languages snapshot
+        uses: lowlighter/metrics@366f8b9dfe3a59656c67d5dcad9950f59c9bc96d
+        with:
+          filename: assets/github-analytics/languages.svg
+          token: ${{ steps.metrics-token.outputs.value }}
+          user: ${{ env.USERNAME }}
+          base: ""
+          plugin_languages: yes
+          plugin_languages_limit: 8
+          plugin_languages_other: yes
+          plugin_languages_details: bytes-size, percentage
+          plugins_errors_fatal: yes
+          output_action: none
+
+      - name: Commit refreshed analytics assets
+        run: |
+          if git diff --quiet -- assets/github-analytics; then
+            echo 'No analytics changes to commit.'
+            exit 0
+          fi
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/github-analytics/*.svg
+          git commit -m 'Update GitHub analytics snapshots [skip ci]'
+          git push origin HEAD:${{ github.ref_name }}

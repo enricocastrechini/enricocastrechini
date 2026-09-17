@@ -41,18 +41,16 @@ I work at the intersection of **Artificial Intelligence**, **engineering**, and 
 ## 📊 GitHub Analytics
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=enricocastrechini&show_icons=true&hide_border=true&theme=tokyonight&include_all_commits=true&cache_seconds=1800" height="170" alt="GitHub stats"/>
-  <img src="https://streak-stats.demolab.com?user=enricocastrechini&theme=tokyonight&hide_border=true&cache_seconds=1800" height="170" alt="GitHub streak stats"/>
+  <img src="./assets/github-analytics/overview.svg" width="49%" alt="GitHub stats overview"/>
+  <img src="./assets/github-analytics/streak.svg" width="49%" alt="GitHub streak stats snapshot"/>
 </p>
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=enricocastrechini&layout=compact&hide_border=true&theme=tokyonight&langs_count=8&cache_seconds=1800" height="170" alt="Top languages"/>
+  <img src="./assets/github-analytics/languages.svg" width="49%" alt="Top languages snapshot"/>
+  <img src="./assets/github-analytics/activity.svg" width="49%" alt="Contribution activity calendar snapshot"/>
 </p>
 
-<p align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=enricocastrechini&theme=tokyo-night&hide_border=true&area=true" width="100%" alt="Contribution activity graph"/>
-</p>
-
+<!-- GitHub trophies still use the public trophy service because this repository now snapshots the core analytics locally, but there is no comparably lightweight maintained static-generation replacement in this change set. -->
 <details>
 <summary>🏆 GitHub Trophies</summary>
 <br>
