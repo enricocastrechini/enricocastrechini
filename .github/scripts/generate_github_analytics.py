@@ -155,6 +155,20 @@ def format_compact(value: int) -> str:
     return f'{value / 1_000_000:.1f}M'
 
 
+def elapsed_years(started_on: date, today: date | None = None) -> int:
+    current_day = today or date.today()
+    years = current_day.year - started_on.year
+    if (current_day.month, current_day.day) < (started_on.month, started_on.day):
+        years -= 1
+    return max(0, years)
+
+
+def format_years_active(years_active: int) -> str:
+    if years_active <= 0:
+        return '<1 year'
+    return f'{years_active} year' if years_active == 1 else f'{years_active} years'
+
+
 def wrap_label(value: str, width: int) -> list[str]:
     text_value = ' '.join(str(value).split())
     if not text_value:
@@ -309,8 +323,8 @@ def build_profile_snapshot(token: str) -> tuple[dict, list[dict]]:
         'public_repos': int(user.get('public_repos', 0)),
         'total_stars': sum(int(repo.get('stargazers_count', 0)) for repo in repositories),
         'merged_prs': fetch_search_total_count(f'author:{USERNAME} is:pr is:merged', token),
-        'closed_issues': fetch_search_total_count(f'author:{USERNAME} is:issue is:closed', token),
-        'years_active': max(1, date.today().year - date.fromisoformat(user['created_at'][:10]).year + 1),
+        'closed_issues': fetch_search_total_count(f'author:{USERNAME} is:issue is:closed -is:pr', token),
+        'years_active': elapsed_years(date.fromisoformat(user['created_at'][:10])),
     }
     return profile, pinned
 
@@ -444,7 +458,7 @@ def trophies_svg(profile: dict, contrib: dict) -> str:
     ]
     body = [
         text(24, 34, 'Profile Milestones', 22, weight='700'),
-        text(24, 58, f"{format_compact(profile['total_stars'])} stars • {format_compact(profile['closed_issues'])} closed issues • active since {profile['years_active']} year{'s' if profile['years_active'] != 1 else ''}", 12, MUTED),
+        text(24, 58, f"{format_compact(profile['total_stars'])} stars • {format_compact(profile['closed_issues'])} closed issues • active since {format_years_active(profile['years_active'])}", 12, MUTED),
     ]
     for index, (label, value, subtitle, color) in enumerate(trophies):
         x = 24 + (index % 3) * 184
@@ -484,13 +498,15 @@ def pinned_repos_svg(repositories: list[dict]) -> str:
         bar_x = x + 20
         bar_y = y + 108
         bar_width = 512
+        clip_id = f'lang-clip-{index}'
+        body.append(f'<clipPath id="{clip_id}"><rect x="{bar_x}" y="{bar_y}" width="{bar_width}" height="12" rx="6"/></clipPath>')
         body.append(f'<rect x="{bar_x}" y="{bar_y}" width="{bar_width}" height="12" rx="6" fill="{BG}" stroke="{GRID}"/>')
         cursor = 0.0
         for stat in language_stats:
             width = bar_width * stat['share'] / 100
             if width <= 0:
                 continue
-            body.append(f'<rect x="{bar_x + cursor:.2f}" y="{bar_y}" width="{width:.2f}" height="12" rx="6" fill="{stat["color"]}"/>')
+            body.append(f'<rect x="{bar_x + cursor:.2f}" y="{bar_y}" width="{width:.2f}" height="12" fill="{stat["color"]}" clip-path="url(#{clip_id})"/>')
             cursor += width
         body.append(text(x + 20, y + 138, f'Primary language: {primary_language} • {share_label} of tracked bytes', 13, ACCENT2, '600'))
         body.append(text(x + 20, y + 162, f"★ {repo.get('stargazers_count', 0)}   ⑂ {repo.get('forks_count', 0)}", 12, MUTED, '600'))

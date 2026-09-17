@@ -80,6 +80,10 @@ class LanguageStatsTests(unittest.TestCase):
 
 
 class ApiHelpersTests(unittest.TestCase):
+    def test_elapsed_years_uses_full_anniversary(self):
+        self.assertEqual(module.elapsed_years(module.date(2025, 10, 1), module.date(2026, 9, 17)), 0)
+        self.assertEqual(module.elapsed_years(module.date(2025, 9, 1), module.date(2026, 9, 17)), 1)
+
     def test_build_headers_uses_bearer_token(self):
         headers = module.build_headers('abc123', content_type='application/json')
         self.assertEqual(headers['Authorization'], 'Bearer ' + 'abc123')
@@ -126,6 +130,31 @@ class SvgRenderingTests(unittest.TestCase):
         self.assertIn('BAC-Mammography-Detection-CVD', svg)
         self.assertIn('Primary language: Jupyter Notebook • 90.0% of tracked bytes', svg)
         self.assertIn('Python 10.0%', svg)
+        self.assertIn('clipPath id="lang-clip-0"', svg)
+
+    def test_pinned_repos_svg_stacks_multiple_cards_and_grows_height(self):
+        repositories = [
+            {
+                'full_name': 'enricocastrechini/BAC-Mammography-Detection-CVD',
+                'description': 'Deep-learning research exploring breast arterial calcification detection.',
+                'language': 'Jupyter Notebook',
+                'language_breakdown': {'Jupyter Notebook': 900, 'Python': 100},
+                'stargazers_count': 0,
+                'forks_count': 0,
+            },
+            {
+                'full_name': 'enricocastrechini/enricocastrechini',
+                'description': 'This is me.',
+                'language': 'Python',
+                'language_breakdown': {'Python': 700, 'HTML': 300},
+                'stargazers_count': 0,
+                'forks_count': 0,
+            },
+        ]
+        svg = module.pinned_repos_svg(repositories)
+        self.assertIn('height="494"', svg)
+        self.assertIn('enricocastrechini/BAC-Mammography-Detection-CVD', svg)
+        self.assertIn('enricocastrechini/enricocastrechini', svg)
 
 
 if __name__ == '__main__':
