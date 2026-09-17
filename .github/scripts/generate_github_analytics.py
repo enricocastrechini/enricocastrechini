@@ -391,6 +391,10 @@ def multiline_text(x: int, y: int, lines: list[str], *, size: int = 13, fill: st
 
 
 def streak_svg(contrib: dict) -> str:
+    width = 960
+    padding = 32
+    column_gap = 32
+    card_width = (width - padding * 2 - column_gap) // 2
     highlight = f"{plural(contrib['current_streak'], 'day')} current streak"
     if contrib['longest_streak'] and contrib['current_longest_is_ongoing']:
         secondary = f"Longest streak: {plural(contrib['longest_streak'], 'day')} • ongoing"
@@ -404,37 +408,40 @@ def streak_svg(contrib: dict) -> str:
         ('Current streak', contrib['current_streak']),
         ('Longest streak', contrib['longest_streak']),
     ]
-    body = [text(24, 34, 'Streak Snapshot', 22, weight='700'), text(24, 58, highlight, 14, ACCENT2, '700'), text(24, 78, secondary, 12, MUTED)]
+    body = [text(padding, 34, 'Streak Snapshot', 22, weight='700'), text(padding, 58, highlight, 14, ACCENT2, '700'), text(padding, 78, secondary, 12, MUTED)]
     for i, (label, value) in enumerate(stats):
-        x = 24 + (i % 2) * 282
+        x = padding + (i % 2) * (card_width + column_gap)
         y = 104 + (i // 2) * 100
-        body.append(f'<rect x="{x}" y="{y}" width="270" height="84" rx="14" fill="{CARD}" stroke="{GRID}"/>')
+        body.append(f'<rect x="{x}" y="{y}" width="{card_width}" height="84" rx="14" fill="{CARD}" stroke="{GRID}"/>')
         body.append(text(x + 18, y + 30, label, 13, MUTED, '600'))
         body.append(text(x + 18, y + 60, value, 24, [ACCENT, ACCENT2, ACCENT3, ACCENT4][i], '700'))
-    body.append(f'<rect x="24" y="308" width="552" height="48" rx="14" fill="{CARD}" stroke="{GRID}"/>')
-    body.append(text(42, 338, f"{contrib['total']} contributions in the last 365 days", 16, TEXT, '600'))
-    body.append(text(576, 338, contrib['range_label'], 11, MUTED, '400', 'end'))
-    return svg_wrap(600, 400, '\n'.join(body))
+    footer_width = width - padding * 2
+    footer_right = padding + footer_width
+    body.append(f'<rect x="{padding}" y="308" width="{footer_width}" height="48" rx="14" fill="{CARD}" stroke="{GRID}"/>')
+    body.append(text(padding + 18, 338, f"{contrib['total']} contributions in the last 365 days", 16, TEXT, '600'))
+    body.append(text(footer_right - 18, 338, contrib['range_label'], 11, MUTED, '400', 'end'))
+    return svg_wrap(width, 400, '\n'.join(body))
 
 
 def activity_svg(contrib: dict) -> str:
+    width = 960
     days = contrib['days']
     min_date = min(day for day, _ in days)
     start_sunday = min_date - timedelta(days=(min_date.weekday() + 1) % 7)
-    cell = 8
-    gap = 2
-    x0 = 28
-    y0 = 86
-    body = [text(24, 34, 'Contribution Activity Snapshot', 22, weight='700'), text(24, 58, 'Last 365 days of public contributions', 12, MUTED)]
+    cell = 12
+    gap = 4
+    x0 = 78
+    y0 = 92
+    body = [text(32, 34, 'Contribution Activity Snapshot', 22, weight='700'), text(32, 58, 'Last 365 days of public contributions', 12, MUTED)]
     month_positions = {}
     for day, _ in days:
         col = (day - start_sunday).days // 7
         month_positions.setdefault(day.strftime('%Y-%m'), (day.strftime('%b'), col))
     for month, col in list(month_positions.values())[:12]:
-        x = min(576, x0 + col * (cell + gap))
+        x = min(width - 32, x0 + col * (cell + gap))
         body.append(text(x, 78, month, 10, MUTED))
     for idx, label in zip([0, 2, 4], ['Sun', 'Tue', 'Thu']):
-        body.append(text(4, y0 + idx * (cell + gap) + 8, label, 10, MUTED))
+        body.append(text(32, y0 + idx * (cell + gap) + 10, label, 10, MUTED))
     for day, count in days:
         col = (day - start_sunday).days // 7
         row = (day.weekday() + 1) % 7
@@ -442,66 +449,72 @@ def activity_svg(contrib: dict) -> str:
         x = x0 + col * (cell + gap)
         y = y0 + row * (cell + gap)
         body.append(f'<rect x="{x}" y="{y}" width="{cell}" height="{cell}" rx="2" fill="{LEVELS[level]}"/>')
-    legend_x = 416
+    legend_x = width - 208
     body.append(text(legend_x, 364, 'Less', 10, MUTED))
     for i, color in enumerate(LEVELS):
         body.append(f'<rect x="{legend_x + 28 + i * 14}" y="355" width="10" height="10" rx="2" fill="{color}"/>')
     body.append(text(legend_x + 110, 364, 'More', 10, MUTED))
-    body.append(text(24, 386, f"Current streak {contrib['current_streak']} • Longest streak {contrib['longest_streak']} • {contrib['range_label']}", 11, MUTED))
-    return svg_wrap(600, 400, '\n'.join(body))
+    body.append(text(32, 386, 'Daily public contributions', 11, MUTED))
+    body.append(text(width - 32, 386, contrib['range_label'], 11, MUTED, '400', 'end'))
+    return svg_wrap(width, 400, '\n'.join(body))
 
 
 def trophies_svg(profile: dict, contrib: dict) -> str:
+    width = 960
+    padding = 32
+    column_gap = 24
+    card_width = (width - padding * 2 - column_gap * 2) // 3
     trophies = [
-        ('Contributions', format_compact(contrib['total']), 'last 365 days', ACCENT),
-        ('Longest streak', plural(contrib['longest_streak'], 'day'), 'best run', ACCENT2),
-        ('Active days', format_compact(contrib['active_days']), 'days with activity', ACCENT3),
         ('Public repos', format_compact(profile['public_repos']), 'owned repositories', ACCENT4),
         ('Followers', format_compact(profile['followers']), 'GitHub audience', '#e0af68'),
         ('Authored PRs', format_compact(profile['merged_prs']), 'merged across GitHub', '#9ece6a'),
+        ('Total stars', format_compact(profile['total_stars']), 'across public repos', ACCENT),
+        ('Closed issues', format_compact(profile['closed_issues']), 'authored issues now closed', ACCENT2),
+        ('Years active', format_years_active(profile['years_active']), 'on GitHub', ACCENT3),
     ]
     body = [
-        text(24, 34, 'Profile Milestones', 22, weight='700'),
-        text(24, 58, f"{format_compact(profile['total_stars'])} stars • {format_compact(profile['closed_issues'])} authored issues now closed • active since {format_years_active(profile['years_active'])}", 12, MUTED),
+        text(padding, 34, 'Profile Milestones', 22, weight='700'),
+        text(padding, 58, 'Public repository and community milestones from authenticated GitHub profile data', 12, MUTED),
     ]
     for index, (label, value, subtitle, color) in enumerate(trophies):
-        x = 24 + (index % 3) * 184
+        x = padding + (index % 3) * (card_width + column_gap)
         y = 88 + (index // 3) * 112
-        body.append(f'<rect x="{x}" y="{y}" width="168" height="92" rx="14" fill="{CARD}" stroke="{GRID}"/>')
+        body.append(f'<rect x="{x}" y="{y}" width="{card_width}" height="92" rx="14" fill="{CARD}" stroke="{GRID}"/>')
         body.append(f'<circle cx="{x + 24}" cy="{y + 24}" r="8" fill="{color}"/>')
         body.append(text(x + 40, y + 29, label, 13, MUTED, '600'))
         body.append(text(x + 18, y + 60, value, 24, color, '700'))
         body.append(text(x + 18, y + 80, subtitle, 11, MUTED))
-    body.append(f'<rect x="24" y="318" width="552" height="38" rx="12" fill="{CARD}" stroke="{GRID}"/>')
-    body.append(text(42, 343, f"Current streak {contrib['current_streak']} • Peak day {contrib['peak_day']} contributions", 13, TEXT, '600'))
-    return svg_wrap(600, 380, '\n'.join(body))
+    return svg_wrap(width, 320, '\n'.join(body))
 
 
 def pinned_repos_svg(repositories: list[dict]) -> str:
+    width = 960
+    padding = 32
     card_height = 252
     top = 78
     gap = 18
     height = top + len(repositories) * card_height + max(len(repositories) - 1, 0) * gap + 30
     body = [
-        text(24, 34, 'Featured Repositories', 22, weight='700'),
-        text(24, 58, 'Repo-owned snapshot refreshed from authenticated GitHub metadata', 12, MUTED),
+        text(padding, 34, 'Featured Repositories', 22, weight='700'),
+        text(padding, 58, 'Repo-owned snapshot refreshed from authenticated GitHub metadata', 12, MUTED),
     ]
     for index, repo in enumerate(repositories):
-        x = 24
+        x = padding
         y = top + index * (card_height + gap)
         name = repo.get('full_name', repo.get('name', 'Repository'))
-        description_lines = wrap_label(repo.get('description') or 'No description provided.', 64)[:3]
+        description_lines = wrap_label(repo.get('description') or 'No description provided.', 104)[:3]
         primary_language, primary_share, language_stats = build_language_stats(
             repo.get('language_breakdown', {}),
             repo.get('language'),
         )
         share_label = f'{primary_share:.1f}%' if primary_share is not None else 'n/a'
-        body.append(f'<rect x="{x}" y="{y}" width="552" height="{card_height}" rx="16" fill="{CARD}" stroke="{GRID}"/>')
+        card_width = width - padding * 2
+        body.append(f'<rect x="{x}" y="{y}" width="{card_width}" height="{card_height}" rx="16" fill="{CARD}" stroke="{GRID}"/>')
         body.append(text(x + 20, y + 30, name, 20, ACCENT, '700'))
         body.append(multiline_text(x + 20, y + 54, description_lines, size=12, fill=TEXT, line_height=17))
         bar_x = x + 20
         bar_y = y + 108
-        bar_width = 512
+        bar_width = card_width - 40
         clip_id = f'lang-clip-{index}'
         body.append(f'<clipPath id="{clip_id}"><rect x="{bar_x}" y="{bar_y}" width="{bar_width}" height="12" rx="6"/></clipPath>')
         body.append(f'<rect x="{bar_x}" y="{bar_y}" width="{bar_width}" height="12" rx="6" fill="{BG}" stroke="{GRID}"/>')
@@ -519,7 +532,7 @@ def pinned_repos_svg(repositories: list[dict]) -> str:
             body.append(f'<circle cx="{x + 24}" cy="{legend_y - 4}" r="4" fill="{stat["color"]}"/>')
             body.append(text(x + 36, legend_y, f"{stat['name']} {stat['share']:.1f}%", 11, MUTED))
             legend_y += 18
-    return svg_wrap(600, height, '\n'.join(body))
+    return svg_wrap(width, height, '\n'.join(body))
 
 
 def write_assets(contrib: dict, profile: dict, pinned: list[dict]) -> None:

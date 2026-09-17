@@ -54,7 +54,7 @@ I work at the intersection of **Artificial Intelligence**, **engineering**, and 
 <summary>🏆 GitHub Trophies</summary>
 <br>
 <p align="center">
-  <img src="./assets/github-analytics/trophies.svg" alt="GitHub trophies"/>
+  <img src="./assets/github-analytics/trophies.svg" width="100%" alt="GitHub trophies"/>
 </p>
 </details>
 
@@ -78,7 +78,7 @@ I work at the intersection of **Artificial Intelligence**, **engineering**, and 
 ## 🚀 Featured Projects
 
 <p align="center">
-  <img src="./assets/github-analytics/pinned-repos.svg" alt="Featured repositories"/>
+  <img src="./assets/github-analytics/pinned-repos.svg" width="100%" alt="Featured repositories"/>
 </p>
 
 <!-- Extend the PINNED_REPOS list in .github/scripts/generate_github_analytics.py
