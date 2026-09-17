@@ -30,18 +30,14 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/enricocastrechini" aria-label="View Enrico Castrechini's GitHub profile">
-    <img
-      src="https://github-readme-stats.vercel.app/api?username=enricocastrechini&show_icons=true&hide_border=true&theme=github_dark&include_all_commits=false&count_private=false"
-      height="165"
-      alt="GitHub statistics for Enrico Castrechini">
-  </a>
-  <a href="https://github.com/enricocastrechini?tab=repositories" aria-label="View Enrico Castrechini's public repositories">
-    <img
-      src="https://github-readme-stats.vercel.app/api/top-langs/?username=enricocastrechini&layout=compact&hide_border=true&theme=github_dark&langs_count=6"
-      height="165"
-      alt="Top languages used by Enrico Castrechini on GitHub">
-  </a>
+  <img
+    src="https://github-readme-stats.vercel.app/api?username=enricocastrechini&show_icons=true&hide_border=true&theme=github_dark&include_all_commits=false&count_private=false"
+    height="165"
+    alt="GitHub statistics for Enrico Castrechini">
+  <img
+    src="https://github-readme-stats.vercel.app/api/top-langs/?username=enricocastrechini&layout=compact&hide_border=true&theme=github_dark&langs_count=6"
+    height="165"
+    alt="Top languages used by Enrico Castrechini on GitHub">
 </p>
 
 <p align="center">
