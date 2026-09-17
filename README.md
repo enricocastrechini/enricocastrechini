@@ -51,7 +51,7 @@ I work at the intersection of **Artificial Intelligence**, **engineering**, and 
   <img src="./assets/github-analytics/languages.svg" width="49%" alt="Top languages snapshot"/>
   <img src="./assets/github-analytics/activity.svg" width="49%" alt="Contribution activity calendar snapshot"/>
 </p>
--->
+
 <details>
 <summary>🏆 GitHub Trophies</summary>
 <br>
@@ -59,7 +59,11 @@ I work at the intersection of **Artificial Intelligence**, **engineering**, and 
   <img src="./assets/github-analytics/trophies.svg" alt="GitHub trophies"/>
 </p>
 </details>
+-->
 
+<p align="center">
+  <img src="./assets/github-analytics/trophies.svg" alt="GitHub trophies"/>
+</p>
 <br>
 
 ## 🌱 Currently Exploring
