@@ -1,91 +1,107 @@
-<table align="center" width="100%" cellpadding="12" cellspacing="0" border="1" bordercolor="#30363d">
-<tr>
-<td align="center" bgcolor="#0d1117">
-<img src="https://raw.githubusercontent.com/enricocastrechini/enricocastrechini/main/assets/workinprogress.gif" width="100%" alt="Animated work-in-progress banner for Enrico Castrechini's GitHub profile README">
-<br>
-</td>
-</tr>
-</table>
+<div align="center">
 
-<h1 align="center">Hi there, I'm Enrico Castrechini 👋</h1>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,100:1f6feb&height=200&section=header&text=Enrico%20Castrechini&fontSize=42&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=AI%20%7C%20Engineering%20%7C%20Digital%20Transformation&descAlignY=55&descSize=18" width="100%"/>
+
+</div>
 
 <p align="center">
-  <strong>Computer Engineer · Engineering Proposal Manager at Leonardo</strong><br>
-  Working at the intersection of AI, engineering, and digital transformation.
+  <img src="https://readme-typing-svg.demolab.com/?lines=Computer+Engineer;Engineering+Proposal+Manager+%40+Leonardo;AI+%26+GenAI+Enthusiast;Building+at+the+intersection+of+AI+and+Engineering&font=Fira+Code&center=true&width=600&height=45&color=58a6ff&vCenter=true&size=22" alt="Typing animation"/>
 </p>
 
 <p align="center">
   <a href="https://www.linkedin.com/in/enricocastrechini">
-    <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="Connect with Enrico Castrechini on LinkedIn">
+    <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/>
+  </a>
+  <a href="https://github.com/enricocastrechini?tab=repositories">
+    <img src="https://img.shields.io/badge/Repositories-181717?style=for-the-badge&logo=github&logoColor=white" alt="Repositories"/>
   </a>
 </p>
 
+<br>
+
+## 🧭 About Me
+
+I work at the intersection of **Artificial Intelligence**, **engineering**, and **business strategy** — turning emerging technologies into practical solutions for complex industrial environments.
+
+- 🤖 **Generative AI** — exploring GenAI, agentic systems, and AI-powered workflows for engineering
+- 🚀 **Aerospace Engineering** — managing complex international proposals, aligning technical & strategic goals
+- 💼 **Tech ↔ Business** — connecting AI/engineering decisions with business outcomes and customer needs
+- 🔬 **Research** — dual MSc in Computer Engineering, with research in deep learning for medical imaging
+
+<br>
+
+## 🛠️ Tech Stack
+
 <p align="center">
-  <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python">
-  <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=flat-square&logo=pytorch&logoColor=white" alt="PyTorch">
-  <img src="https://img.shields.io/badge/TensorFlow-FF6F00?style=flat-square&logo=tensorflow&logoColor=white" alt="TensorFlow">
-  <img src="https://img.shields.io/badge/OpenCV-5C3EE8?style=flat-square&logo=opencv&logoColor=white" alt="OpenCV">
-  <img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white" alt="Git">
-  <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub">
+  <img src="https://skillicons.dev/icons?i=python,pytorch,tensorflow,opencv,git,github,linux,vscode,docker&theme=dark" alt="Tech stack icons"/>
+</p>
+
+<br>
+
+## 📊 GitHub Analytics
+
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=enricocastrechini&show_icons=true&hide_border=true&theme=tokyonight&include_all_commits=true&count_private=true&cache_seconds=1800" height="170" alt="GitHub stats"/>
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=enricocastrechini&theme=tokyonight&hide_border=true&cache_seconds=1800" height="170" alt="GitHub streak stats"/>
 </p>
 
 <p align="center">
-  <img
-    src="https://github-readme-stats.vercel.app/api?username=enricocastrechini&show_icons=true&hide_border=true&theme=github_dark&include_all_commits=false&count_private=false"
-    height="165"
-    alt="GitHub statistics for Enrico Castrechini">
-  <img
-    src="https://github-readme-stats.vercel.app/api/top-langs/?username=enricocastrechini&layout=compact&hide_border=true&theme=github_dark&langs_count=6"
-    height="165"
-    alt="Top languages used by Enrico Castrechini on GitHub">
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=enricocastrechini&layout=compact&hide_border=true&theme=tokyonight&langs_count=8&cache_seconds=1800" height="170" alt="Top languages"/>
 </p>
 
 <p align="center">
-  These summary cards are served by <a href="https://github.com/anuraghazra/github-readme-stats">GitHub Readme Stats</a>.<br>
-  For a first-party, text-accessible view, visit my <a href="https://github.com/enricocastrechini">GitHub profile</a> and <a href="https://github.com/enricocastrechini?tab=repositories">public repositories</a>.
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=enricocastrechini&theme=tokyo-night&hide_border=true&area=true" width="100%" alt="Contribution activity graph"/>
 </p>
 
----
+<details>
+<summary>🏆 GitHub Trophies</summary>
+<br>
+<p align="center">
+  <img src="https://github-profile-trophy.vercel.app/?username=enricocastrechini&theme=tokyonight&no-frame=true&row=1&column=7" alt="GitHub trophies"/>
+</p>
+</details>
 
-### About me
+<br>
 
-I work at the intersection of **Artificial Intelligence**, **engineering**, and **business strategy**.
+## 🌱 Currently Exploring
 
-I am particularly interested in how emerging technologies can be transformed into practical solutions for complex engineering and industrial environments. My work combines technical exploration with strategic planning, proposal management, and cross-functional collaboration.
+<table align="center">
+<tr>
+<td>🧠 Generative AI & agentic workflows</td>
+<td>🏭 AI adoption in engineering organizations</td>
+</tr>
+<tr>
+<td>🌐 Digital transformation & industrial innovation</td>
+<td>👁️ Applied deep learning & computer vision</td>
+</tr>
+</table>
 
-- 🤖 **Generative AI:** Exploring GenAI, agent-based systems, and AI-powered workflows for engineering.
-- 🚀 **Aerospace solutions:** Managing complex international engineering proposals and aligning technical requirements with strategic objectives.
-- 💼 **Technology and business:** Connecting AI and engineering decisions with business goals and customer needs.
-- 🔬 **Research background:** Dual MSc in Computer Engineering, with research experience in deep learning for medical imaging.
+<br>
 
-### Currently exploring
+## 🚀 Featured Projects
 
-- Generative AI and agentic workflows
-- AI adoption in engineering organizations
-- Digital transformation and industrial innovation
-- The practical application of deep learning and computer vision
+<p align="center">
+  <a href="https://github.com/enricocastrechini/BAC-Mammography-Detection-CVD">
+    <img src="https://github-readme-stats.vercel.app/api/pin/?username=enricocastrechini&repo=BAC-Mammography-Detection-CVD&theme=tokyonight&hide_border=true&cache_seconds=1800" alt="BAC Mammography Detection CVD"/>
+  </a>
+</p>
 
-### Featured projects
-
-- **[BAC-Mammography-Detection-CVD](https://github.com/enricocastrechini/BAC-Mammography-Detection-CVD)** — Deep-learning research exploring breast arterial calcification detection in mammograms as a potential imaging biomarker for cardiovascular disease risk assessment.
-
-<!-- Add more featured projects here as additional public repositories become available. -->
-
-### Elsewhere
-
-My personal website is currently under construction.
-
-You can connect with me on [LinkedIn](https://www.linkedin.com/in/enricocastrechini).
-
-<!--
-Here are some ideas to get you started:
-
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
+<!-- Add more pinned-repo cards here as new public projects become available, e.g.:
+<a href="https://github.com/enricocastrechini/REPO_NAME">
+  <img src="https://github-readme-stats.vercel.app/api/pin/?username=enricocastrechini&repo=REPO_NAME&theme=tokyonight&hide_border=true" alt="REPO_NAME"/>
+</a>
 -->
+
+<br>
+
+## 📫 Let's Connect
+
+<p align="center">
+  <a href="https://www.linkedin.com/in/enricocastrechini">
+    <img src="https://img.shields.io/badge/-Connect%20on%20LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"/>
+  </a>
+</p>
+
+<p align="center"><i>My personal website is currently under construction.</i></p>
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:1f6feb,100:0d1117&height=100&section=footer" width="100%"/>
