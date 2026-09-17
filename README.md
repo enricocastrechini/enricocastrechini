@@ -50,12 +50,11 @@ I work at the intersection of **Artificial Intelligence**, **engineering**, and 
   <img src="./assets/github-analytics/activity.svg" width="49%" alt="Contribution activity calendar snapshot"/>
 </p>
 
-<!-- GitHub trophies still use the public trophy service because this repository now snapshots the core analytics locally, but there is no comparably lightweight maintained static-generation replacement in this change set. -->
 <details>
 <summary>🏆 GitHub Trophies</summary>
 <br>
 <p align="center">
-  <img src="https://github-profile-trophy.vercel.app/?username=enricocastrechini&theme=tokyonight&no-frame=true&row=1&column=7" alt="GitHub trophies"/>
+  <img src="./assets/github-analytics/trophies.svg" alt="GitHub trophies"/>
 </p>
 </details>
 
@@ -79,16 +78,11 @@ I work at the intersection of **Artificial Intelligence**, **engineering**, and 
 ## 🚀 Featured Projects
 
 <p align="center">
-  <a href="https://github.com/enricocastrechini/BAC-Mammography-Detection-CVD">
-    <img src="https://github-readme-stats.vercel.app/api/pin/?username=enricocastrechini&repo=BAC-Mammography-Detection-CVD&theme=tokyonight&hide_border=true&cache_seconds=1800" alt="BAC Mammography Detection"/>
-  </a>
+  <img src="./assets/github-analytics/pinned-repos.svg" alt="Featured repositories"/>
 </p>
 
-<!-- Add more pinned-repo cards here as new public projects become available, e.g.:
-<a href="https://github.com/enricocastrechini/REPO_NAME">
-  <img src="https://github-readme-stats.vercel.app/api/pin/?username=enricocastrechini&repo=REPO_NAME&theme=tokyonight&hide_border=true" alt="REPO_NAME"/>
-</a>
--->
+<!-- Extend the PINNED_REPOS list in .github/scripts/generate_github_analytics.py
+to include more public projects in this combined local card. -->
 
 <br>
 

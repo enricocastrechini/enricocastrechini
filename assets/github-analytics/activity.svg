@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400" role="img" aria-labelledby="title desc">
 <title>GitHub analytics snapshot for enricocastrechini</title>
-<desc>Static snapshot generated from public GitHub profile data and refreshed by workflow.</desc>
+<desc>Static snapshot generated from authenticated GitHub profile data and refreshed by workflow.</desc>
 <defs>
   <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
     <stop offset="0%" stop-color="#1a1b27"/>
