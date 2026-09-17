@@ -1,11 +1,11 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,100:1f6feb&height=200&section=header&text=Enrico%20Castrechini&fontSize=42&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=AI%20%7C%20Engineering%20%7C%20Digital%20Transformation&descAlignY=55&descSize=18" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,100:1f6feb&height=200&section=header&text=Enrico%20Castrechini&fontSize=42&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=AI%20%7C%20Engineering%20%7C%20Strategy" alt="Header"/>
 
 </div>
 
 <p align="center">
-  <img src="https://readme-typing-svg.demolab.com/?lines=Computer+Engineer;Engineering+Proposal+Manager+%40+Leonardo;AI+%26+GenAI+Enthusiast;Building+at+the+intersection+of+AI+and+Engineering&font=Fira+Code&center=true&width=600&height=45&color=58a6ff&vCenter=true&size=22" alt="Typing animation"/>
+  <img src="https://readme-typing-svg.demolab.com/?lines=Computer+Engineer;Engineering+Proposal+Manager+%40+Leonardo;AI+%26+GenAI+Enthusiast;Building+at+the+intersection+of+AI+and+Engineering&font=Fira%20Code&center=true&width=500&height=50" alt="Typing animation"/>
 </p>
 
 <p align="center">
@@ -41,8 +41,8 @@ I work at the intersection of **Artificial Intelligence**, **engineering**, and 
 ## 📊 GitHub Analytics
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=enricocastrechini&show_icons=true&hide_border=true&theme=tokyonight&include_all_commits=true&count_private=true&cache_seconds=1800" height="170" alt="GitHub stats"/>
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=enricocastrechini&theme=tokyonight&hide_border=true&cache_seconds=1800" height="170" alt="GitHub streak stats"/>
+  <img src="https://github-readme-stats.vercel.app/api?username=enricocastrechini&show_icons=true&hide_border=true&theme=tokyonight&include_all_commits=true&cache_seconds=1800" height="170" alt="GitHub stats"/>
+  <img src="https://streak-stats.demolab.com?user=enricocastrechini&theme=tokyonight&hide_border=true&cache_seconds=1800" height="170" alt="GitHub streak stats"/>
 </p>
 
 <p align="center">
@@ -82,7 +82,7 @@ I work at the intersection of **Artificial Intelligence**, **engineering**, and 
 
 <p align="center">
   <a href="https://github.com/enricocastrechini/BAC-Mammography-Detection-CVD">
-    <img src="https://github-readme-stats.vercel.app/api/pin/?username=enricocastrechini&repo=BAC-Mammography-Detection-CVD&theme=tokyonight&hide_border=true&cache_seconds=1800" alt="BAC Mammography Detection CVD"/>
+    <img src="https://github-readme-stats.vercel.app/api/pin/?username=enricocastrechini&repo=BAC-Mammography-Detection-CVD&theme=tokyonight&hide_border=true&cache_seconds=1800" alt="BAC Mammography Detection"/>
   </a>
 </p>
 
@@ -102,6 +102,6 @@ I work at the intersection of **Artificial Intelligence**, **engineering**, and 
   </a>
 </p>
 
-<p align="center"><i>My personal website is currently under construction.</i></p>
+<p align="center"><i>Open to collaborations in AI, engineering innovation, and digital transformation.</i></p>
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:1f6feb,100:0d1117&height=100&section=footer" width="100%"/>
