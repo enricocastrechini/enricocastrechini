@@ -1,5 +1,6 @@
 import importlib.util
 import pathlib
+import tempfile
 import unittest
 import xml.etree.ElementTree as ET
 
@@ -205,11 +206,56 @@ class SvgRenderingTests(unittest.TestCase):
             },
         ]
         svg = module.pinned_repos_svg(repositories)
-        self.assertIn('height="630"', svg)
-        self.assertIn('viewBox="0 0 960 630"', svg)
+        self.assertIn('height="636"', svg)
+        self.assertIn('viewBox="0 0 960 636"', svg)
         self.assertIn('enricocastrechini/BAC-Mammography-Detection-CVD', svg)
         self.assertIn('enricocastrechini/enricocastrechini', svg)
         ET.fromstring(svg)
+
+    def test_write_assets_uses_updated_trophies_signature(self):
+        contrib = {
+            'total': 40,
+            'current_streak': 3,
+            'longest_streak': 7,
+            'active_days': 12,
+            'peak_day': 5,
+            'best_end': module.date(2026, 9, 10),
+            'current_longest_is_ongoing': False,
+            'range_label': '2025-09-18 → 2026-09-17',
+            'days': [
+                (module.date(2026, 9, 15), 1),
+                (module.date(2026, 9, 16), 2),
+                (module.date(2026, 9, 17), 0),
+            ],
+        }
+        profile = {
+            'followers': 1,
+            'public_repos': 2,
+            'total_stars': 4,
+            'merged_prs': 3,
+            'closed_issues': 5,
+            'years_active': 1,
+        }
+        pinned = [
+            {
+                'full_name': 'enricocastrechini/example',
+                'description': 'Example repository used to validate asset writing.',
+                'language': 'Python',
+                'language_breakdown': {'Python': 700, 'HTML': 300},
+                'stargazers_count': 1,
+                'forks_count': 2,
+            }
+        ]
+        with tempfile.TemporaryDirectory() as tmpdir:
+            original_out = module.OUT
+            module.OUT = pathlib.Path(tmpdir)
+            try:
+                module.write_assets(contrib, profile, pinned)
+                trophies_path = pathlib.Path(tmpdir) / 'trophies.svg'
+                self.assertTrue(trophies_path.exists())
+                self.assertIn('Profile Milestones', trophies_path.read_text(encoding='utf-8'))
+            finally:
+                module.OUT = original_out
 
 
 if __name__ == '__main__':

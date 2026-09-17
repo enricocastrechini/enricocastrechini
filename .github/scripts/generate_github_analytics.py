@@ -493,7 +493,8 @@ def pinned_repos_svg(repositories: list[dict]) -> str:
     card_height = 252
     top = 78
     gap = 18
-    height = top + len(repositories) * card_height + max(len(repositories) - 1, 0) * gap + 30
+    bottom_padding = 36
+    height = top + len(repositories) * card_height + max(len(repositories) - 1, 0) * gap + bottom_padding
     body = [
         text(padding, 34, 'Featured Repositories', 22, weight='700'),
         text(padding, 58, 'Repo-owned snapshot refreshed from authenticated GitHub metadata', 12, MUTED),
