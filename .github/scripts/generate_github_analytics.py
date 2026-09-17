@@ -34,11 +34,7 @@ def plural(value: int, unit: str) -> str:
     return f"{value} {unit}{'' if value == 1 else 's'}"
 
 
-def parse_contributions() -> dict:
-    today = date.today()
-    start = today - timedelta(days=364)
-    html_text = fetch(f'https://github.com/users/{USERNAME}/contributions?from={start.isoformat()}&to={today.isoformat()}')
-
+def extract_contribution_days(html_text: str) -> list[tuple[date, int]]:
     day_ids = re.findall(r'<td[^>]*data-date="([0-9-]+)"[^>]*id="([^"]+)"[^>]*class="ContributionCalendar-day"', html_text, re.S)
     tooltip_counts = {}
     for day_id, label in re.findall(r'<tool-tip[^>]*for="([^"]+)"[^>]*>([^<]+)</tool-tip>', html_text, re.S):
@@ -50,6 +46,14 @@ def parse_contributions() -> dict:
     for day_str, day_id in day_ids:
         days.append((datetime.strptime(day_str, '%Y-%m-%d').date(), tooltip_counts.get(day_id, 0)))
     days.sort()
+    return days
+
+
+def parse_contributions() -> dict:
+    today = date.today()
+    start = today - timedelta(days=364)
+    html_text = fetch(f'https://github.com/users/{USERNAME}/contributions?from={start.isoformat()}&to={today.isoformat()}')
+    days = extract_contribution_days(html_text)
     if not days:
         raise RuntimeError('Could not parse any contribution days from the GitHub contributions page.')
 
@@ -73,6 +77,7 @@ def parse_contributions() -> dict:
         else:
             running = 0
 
+    current_longest_is_ongoing = bool(current and current == longest)
     active_days = sum(1 for _, count in days if count > 0)
     peak = max((count for _, count in days), default=0)
     return {
@@ -84,6 +89,7 @@ def parse_contributions() -> dict:
         'active_days': active_days,
         'peak_day': peak,
         'best_end': best_end,
+        'current_longest_is_ongoing': current_longest_is_ongoing,
     }
 
 
@@ -98,7 +104,9 @@ def text(x, y, content, size=16, fill=TEXT, weight='400', anchor='start'):
 
 def streak_svg(contrib):
     highlight = f"{plural(contrib['current_streak'], 'day')} current streak"
-    if contrib['longest_streak'] and contrib['best_end']:
+    if contrib['longest_streak'] and contrib['current_longest_is_ongoing']:
+        secondary = f"Longest streak: {plural(contrib['longest_streak'], 'day')} • ongoing"
+    elif contrib['longest_streak'] and contrib['best_end']:
         secondary = f"Longest streak: {plural(contrib['longest_streak'], 'day')} • ended {contrib['best_end'].isoformat()}"
     else:
         secondary = 'No contribution streak detected yet'
