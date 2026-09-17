@@ -30,6 +30,9 @@ jobs:
           fetch-depth: 0
           ref: ${{ github.ref_name }}
 
+      - name: Fast-forward branch before generating snapshots
+        run: git pull --ff-only origin "${{ github.ref_name }}"
+
       - name: Run generator unit tests
         run: python -m unittest discover -s tests -p 'test_*.py'
 
@@ -56,7 +59,10 @@ jobs:
           plugins_errors_fatal: yes
           output_action: none
 
-      - name: Generate local streak and activity snapshots
+      - name: Generate local analytics snapshots
+        env:
+          GITHUB_TOKEN: ${{ steps.metrics-token.outputs.value }}
+          GITHUB_USERNAME: ${{ env.USERNAME }}
         run: python .github/scripts/generate_github_analytics.py
 
       - name: Generate top languages snapshot
@@ -84,4 +90,5 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add assets/github-analytics/*.svg
           git commit -m 'Update GitHub analytics snapshots [skip ci]'
+          git pull --rebase origin "${{ github.ref_name }}"
           git push origin HEAD:${{ github.ref_name }}
