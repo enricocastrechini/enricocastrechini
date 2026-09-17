@@ -78,6 +78,15 @@ class LanguageStatsTests(unittest.TestCase):
         self.assertAlmostEqual(share, 90.0)
         self.assertEqual(stats[0]['name'], 'Jupyter Notebook')
 
+    def test_build_language_stats_falls_back_to_largest_language_when_primary_missing(self):
+        primary, share, stats = module.build_language_stats(
+            {'Python': 700, 'HTML': 300},
+            'Jupyter Notebook',
+        )
+        self.assertEqual(primary, 'Python')
+        self.assertAlmostEqual(share, 70.0)
+        self.assertEqual(stats[0]['name'], 'Python')
+
 
 class ApiHelpersTests(unittest.TestCase):
     def test_elapsed_years_uses_full_anniversary(self):
@@ -152,7 +161,7 @@ class SvgRenderingTests(unittest.TestCase):
             },
         ]
         svg = module.pinned_repos_svg(repositories)
-        self.assertIn('height="494"', svg)
+        self.assertIn('height="630"', svg)
         self.assertIn('enricocastrechini/BAC-Mammography-Detection-CVD', svg)
         self.assertIn('enricocastrechini/enricocastrechini', svg)
 

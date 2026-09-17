@@ -30,8 +30,10 @@ jobs:
           fetch-depth: 0
           ref: ${{ github.ref_name }}
 
-      - name: Fast-forward branch before generating snapshots
-        run: git pull --ff-only origin "${{ github.ref_name }}"
+      - name: Refresh branch before generating snapshots
+        run: |
+          git fetch origin "${{ github.ref_name }}"
+          git checkout -B "${{ github.ref_name }}" "origin/${{ github.ref_name }}"
 
       - name: Run generator unit tests
         run: python -m unittest discover -s tests -p 'test_*.py'

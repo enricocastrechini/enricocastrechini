@@ -340,7 +340,11 @@ def build_language_stats(language_breakdown: dict[str, int], primary_language: s
         selected_primary, primary_size = ordered[0]
     share = (primary_size / total * 100) if primary_size is not None else None
     stats = []
-    for index, (name, size) in enumerate(ordered[:4]):
+    visible_languages = ordered[:3]
+    remainder = ordered[3:]
+    if remainder:
+        visible_languages.append(('Other', sum(size for _, size in remainder)))
+    for index, (name, size) in enumerate(visible_languages):
         stats.append({
             'name': name,
             'share': size / total * 100,
@@ -458,7 +462,7 @@ def trophies_svg(profile: dict, contrib: dict) -> str:
     ]
     body = [
         text(24, 34, 'Profile Milestones', 22, weight='700'),
-        text(24, 58, f"{format_compact(profile['total_stars'])} stars • {format_compact(profile['closed_issues'])} authored issues closed • active since {format_years_active(profile['years_active'])}", 12, MUTED),
+        text(24, 58, f"{format_compact(profile['total_stars'])} stars • {format_compact(profile['closed_issues'])} authored issues now closed • active since {format_years_active(profile['years_active'])}", 12, MUTED),
     ]
     for index, (label, value, subtitle, color) in enumerate(trophies):
         x = 24 + (index % 3) * 184
@@ -474,7 +478,7 @@ def trophies_svg(profile: dict, contrib: dict) -> str:
 
 
 def pinned_repos_svg(repositories: list[dict]) -> str:
-    card_height = 184
+    card_height = 252
     top = 78
     gap = 18
     height = top + len(repositories) * card_height + max(len(repositories) - 1, 0) * gap + 30
@@ -510,11 +514,11 @@ def pinned_repos_svg(repositories: list[dict]) -> str:
             cursor += width
         body.append(text(x + 20, y + 138, f'Primary language: {primary_language} • {share_label} of tracked bytes', 13, ACCENT2, '600'))
         body.append(text(x + 20, y + 162, f"★ {repo.get('stargazers_count', 0)}   ⑂ {repo.get('forks_count', 0)}", 12, MUTED, '600'))
-        legend_x = x + 268
-        for stat in language_stats[:3]:
-            body.append(f'<circle cx="{legend_x}" cy="{y + 158}" r="4" fill="{stat["color"]}"/>')
-            body.append(text(legend_x + 10, y + 162, f"{stat['name']} {stat['share']:.1f}%", 11, MUTED))
-            legend_x += 108
+        legend_y = y + 188
+        for stat in language_stats:
+            body.append(f'<circle cx="{x + 24}" cy="{legend_y - 4}" r="4" fill="{stat["color"]}"/>')
+            body.append(text(x + 36, legend_y, f"{stat['name']} {stat['share']:.1f}%", 11, MUTED))
+            legend_y += 18
     return svg_wrap(600, height, '\n'.join(body))
 
 
