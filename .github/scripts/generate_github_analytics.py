@@ -520,11 +520,11 @@ def pinned_repos_svg(repositories: list[dict]) -> str:
         body.append(f'<rect x="{bar_x}" y="{bar_y}" width="{bar_width}" height="12" rx="6" fill="{BG}" stroke="{GRID}"/>')
         cursor = 0.0
         for stat in language_stats:
-            width = bar_width * stat['share'] / 100
-            if width <= 0:
+            segment_width = bar_width * stat['share'] / 100
+            if segment_width <= 0:
                 continue
-            body.append(f'<rect x="{bar_x + cursor:.2f}" y="{bar_y}" width="{width:.2f}" height="12" fill="{stat["color"]}" clip-path="url(#{clip_id})"/>')
-            cursor += width
+            body.append(f'<rect x="{bar_x + cursor:.2f}" y="{bar_y}" width="{segment_width:.2f}" height="12" fill="{stat["color"]}" clip-path="url(#{clip_id})"/>')
+            cursor += segment_width
         body.append(text(x + 20, y + 138, f'Primary language: {primary_language} • {share_label} of tracked bytes', 13, ACCENT2, '600'))
         body.append(text(x + 20, y + 162, f"★ {repo.get('stargazers_count', 0)}   ⑂ {repo.get('forks_count', 0)}", 12, MUTED, '600'))
         legend_y = y + 188
