@@ -62,7 +62,7 @@ I work at the intersection of **Artificial Intelligence**, **engineering**, and 
 -->
 
 <p align="center">
-  <img src="./assets/github-analytics/trophies.svg" alt="GitHub trophies"/>
+  <img src="./assets/github-analytics/trophies.svg" width="100%" alt="GitHub trophies"/>
 </p>
 <br>
 
