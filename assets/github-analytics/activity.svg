@@ -11,20 +11,26 @@
 <text x="24" y="34" fill="#c0caf5" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700" text-anchor="start">Contribution Activity Snapshot</text>
 <text x="24" y="58" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" text-anchor="start">Last 365 days of public contributions</text>
 <text x="28" y="78" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" text-anchor="start">Sep</text>
-<text x="48" y="78" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" text-anchor="start">Oct</text>
-<text x="88" y="78" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" text-anchor="start">Nov</text>
-<text x="138" y="78" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" text-anchor="start">Dec</text>
-<text x="178" y="78" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" text-anchor="start">Jan</text>
-<text x="228" y="78" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" text-anchor="start">Feb</text>
-<text x="268" y="78" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" text-anchor="start">Mar</text>
-<text x="308" y="78" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" text-anchor="start">Apr</text>
-<text x="348" y="78" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" text-anchor="start">May</text>
-<text x="398" y="78" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" text-anchor="start">Jun</text>
-<text x="438" y="78" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" text-anchor="start">Jul</text>
-<text x="478" y="78" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" text-anchor="start">Aug</text>
+<text x="38" y="78" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" text-anchor="start">Oct</text>
+<text x="78" y="78" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" text-anchor="start">Nov</text>
+<text x="128" y="78" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" text-anchor="start">Dec</text>
+<text x="168" y="78" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" text-anchor="start">Jan</text>
+<text x="218" y="78" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" text-anchor="start">Feb</text>
+<text x="258" y="78" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" text-anchor="start">Mar</text>
+<text x="298" y="78" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" text-anchor="start">Apr</text>
+<text x="338" y="78" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" text-anchor="start">May</text>
+<text x="388" y="78" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" text-anchor="start">Jun</text>
+<text x="428" y="78" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" text-anchor="start">Jul</text>
+<text x="468" y="78" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" text-anchor="start">Aug</text>
 <text x="4" y="94" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" text-anchor="start">Sun</text>
 <text x="4" y="114" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" text-anchor="start">Tue</text>
 <text x="4" y="134" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" text-anchor="start">Thu</text>
+<rect x="28" y="86" width="8" height="8" rx="2" fill="#1f2335"/>
+<rect x="28" y="96" width="8" height="8" rx="2" fill="#1f2335"/>
+<rect x="28" y="106" width="8" height="8" rx="2" fill="#1f2335"/>
+<rect x="28" y="116" width="8" height="8" rx="2" fill="#1f2335"/>
+<rect x="28" y="126" width="8" height="8" rx="2" fill="#1f2335"/>
+<rect x="28" y="136" width="8" height="8" rx="2" fill="#1f2335"/>
 <rect x="28" y="146" width="8" height="8" rx="2" fill="#1f2335"/>
 <rect x="38" y="86" width="8" height="8" rx="2" fill="#1f2335"/>
 <rect x="38" y="96" width="8" height="8" rx="2" fill="#1f2335"/>
@@ -368,28 +374,22 @@
 <rect x="518" y="116" width="8" height="8" rx="2" fill="#1f2335"/>
 <rect x="518" y="126" width="8" height="8" rx="2" fill="#1f2335"/>
 <rect x="518" y="136" width="8" height="8" rx="2" fill="#1f2335"/>
-<rect x="518" y="146" width="8" height="8" rx="2" fill="#1f2335"/>
+<rect x="518" y="146" width="8" height="8" rx="2" fill="#7aa2f7"/>
 <rect x="528" y="86" width="8" height="8" rx="2" fill="#1f2335"/>
 <rect x="528" y="96" width="8" height="8" rx="2" fill="#1f2335"/>
 <rect x="528" y="106" width="8" height="8" rx="2" fill="#1f2335"/>
 <rect x="528" y="116" width="8" height="8" rx="2" fill="#1f2335"/>
-<rect x="528" y="126" width="8" height="8" rx="2" fill="#1f2335"/>
+<rect x="528" y="126" width="8" height="8" rx="2" fill="#73daca"/>
 <rect x="528" y="136" width="8" height="8" rx="2" fill="#1f2335"/>
-<rect x="528" y="146" width="8" height="8" rx="2" fill="#7aa2f7"/>
-<rect x="538" y="86" width="8" height="8" rx="2" fill="#1f2335"/>
+<rect x="528" y="146" width="8" height="8" rx="2" fill="#1f2335"/>
+<rect x="538" y="86" width="8" height="8" rx="2" fill="#73daca"/>
 <rect x="538" y="96" width="8" height="8" rx="2" fill="#1f2335"/>
 <rect x="538" y="106" width="8" height="8" rx="2" fill="#1f2335"/>
 <rect x="538" y="116" width="8" height="8" rx="2" fill="#1f2335"/>
 <rect x="538" y="126" width="8" height="8" rx="2" fill="#73daca"/>
-<rect x="538" y="136" width="8" height="8" rx="2" fill="#1f2335"/>
+<rect x="538" y="136" width="8" height="8" rx="2" fill="#7aa2f7"/>
 <rect x="538" y="146" width="8" height="8" rx="2" fill="#1f2335"/>
-<rect x="548" y="86" width="8" height="8" rx="2" fill="#73daca"/>
-<rect x="548" y="96" width="8" height="8" rx="2" fill="#1f2335"/>
-<rect x="548" y="106" width="8" height="8" rx="2" fill="#1f2335"/>
-<rect x="548" y="116" width="8" height="8" rx="2" fill="#1f2335"/>
-<rect x="548" y="126" width="8" height="8" rx="2" fill="#73daca"/>
-<rect x="548" y="136" width="8" height="8" rx="2" fill="#7aa2f7"/>
-<rect x="548" y="146" width="8" height="8" rx="2" fill="#1f2335"/>
+<rect x="548" y="86" width="8" height="8" rx="2" fill="#1f2335"/>
 <text x="416" y="364" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" text-anchor="start">Less</text>
 <rect x="444" y="355" width="10" height="10" rx="2" fill="#1f2335"/>
 <rect x="458" y="355" width="10" height="10" rx="2" fill="#2f3549"/>
@@ -397,5 +397,5 @@
 <rect x="486" y="355" width="10" height="10" rx="2" fill="#7aa2f7"/>
 <rect x="500" y="355" width="10" height="10" rx="2" fill="#73daca"/>
 <text x="526" y="364" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" text-anchor="start">More</text>
-<text x="24" y="386" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" text-anchor="start">Current streak 0 • Longest streak 2 • 2025-09-20 → 2026-09-19</text>
+<text x="24" y="386" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" text-anchor="start">Current streak 0 • Longest streak 2 • 2025-09-21 → 2026-09-20</text>
 </svg>
