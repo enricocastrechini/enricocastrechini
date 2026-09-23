@@ -25,7 +25,6 @@
 <text x="4" y="94" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" text-anchor="start">Sun</text>
 <text x="4" y="114" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" text-anchor="start">Tue</text>
 <text x="4" y="134" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" text-anchor="start">Thu</text>
-<rect x="28" y="106" width="8" height="8" rx="2" fill="#1f2335"/>
 <rect x="28" y="116" width="8" height="8" rx="2" fill="#1f2335"/>
 <rect x="28" y="126" width="8" height="8" rx="2" fill="#1f2335"/>
 <rect x="28" y="136" width="8" height="8" rx="2" fill="#1f2335"/>
@@ -390,6 +389,7 @@
 <rect x="548" y="86" width="8" height="8" rx="2" fill="#1f2335"/>
 <rect x="548" y="96" width="8" height="8" rx="2" fill="#1f2335"/>
 <rect x="548" y="106" width="8" height="8" rx="2" fill="#1f2335"/>
+<rect x="548" y="116" width="8" height="8" rx="2" fill="#1f2335"/>
 <text x="416" y="364" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" text-anchor="start">Less</text>
 <rect x="444" y="355" width="10" height="10" rx="2" fill="#1f2335"/>
 <rect x="458" y="355" width="10" height="10" rx="2" fill="#2f3549"/>
@@ -397,5 +397,5 @@
 <rect x="486" y="355" width="10" height="10" rx="2" fill="#7aa2f7"/>
 <rect x="500" y="355" width="10" height="10" rx="2" fill="#73daca"/>
 <text x="526" y="364" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" text-anchor="start">More</text>
-<text x="24" y="386" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" text-anchor="start">Current streak 0 • Longest streak 2 • 2025-09-23 → 2026-09-22</text>
+<text x="24" y="386" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" text-anchor="start">Current streak 0 • Longest streak 2 • 2025-09-24 → 2026-09-23</text>
 </svg>
