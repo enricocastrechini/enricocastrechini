@@ -1,6 +1,8 @@
 import importlib.util
 import pathlib
+import tempfile
 import unittest
+import xml.etree.ElementTree as ET
 
 MODULE_PATH = pathlib.Path(__file__).resolve().parents[1] / '.github' / 'scripts' / 'generate_github_analytics.py'
 spec = importlib.util.spec_from_file_location('generate_github_analytics', MODULE_PATH)
@@ -100,14 +102,46 @@ class ApiHelpersTests(unittest.TestCase):
 
 
 class SvgRenderingTests(unittest.TestCase):
-    def test_trophies_svg_includes_profile_milestones(self):
+    def test_streak_svg_uses_wider_layout_and_keeps_streak_only_stats(self):
         contrib = {
             'total': 40,
-            'current_streak': 1,
-            'longest_streak': 1,
-            'active_days': 4,
-            'peak_day': 17,
+            'current_streak': 3,
+            'longest_streak': 7,
+            'active_days': 12,
+            'peak_day': 5,
+            'best_end': module.date(2026, 9, 10),
+            'current_longest_is_ongoing': False,
+            'range_label': '2025-09-18 → 2026-09-17',
         }
+        svg = module.streak_svg(contrib)
+        self.assertIn('width="960"', svg)
+        self.assertIn('viewBox="0 0 960 400"', svg)
+        self.assertIn('40 contributions in the last 365 days', svg)
+        self.assertIn('Current streak', svg)
+        self.assertIn('Longest streak', svg)
+        ET.fromstring(svg)
+
+    def test_activity_svg_uses_wider_layout_and_omits_streak_footer(self):
+        contrib = {
+            'days': [
+                (module.date(2026, 9, 15), 1),
+                (module.date(2026, 9, 16), 2),
+                (module.date(2026, 9, 17), 0),
+            ],
+            'current_streak': 0,
+            'longest_streak': 2,
+            'range_label': '2025-09-18 → 2026-09-17',
+        }
+        svg = module.activity_svg(contrib)
+        self.assertIn('width="960"', svg)
+        self.assertIn('viewBox="0 0 960 400"', svg)
+        self.assertIn('Daily public contributions', svg)
+        self.assertIn(contrib['range_label'], svg)
+        self.assertNotIn('Current streak', svg)
+        self.assertNotIn('Longest streak', svg)
+        ET.fromstring(svg)
+
+    def test_trophies_svg_includes_profile_milestones(self):
         profile = {
             'followers': 1,
             'public_repos': 2,
@@ -116,11 +150,20 @@ class SvgRenderingTests(unittest.TestCase):
             'closed_issues': 0,
             'years_active': 1,
         }
-        svg = module.trophies_svg(profile, contrib)
+        svg = module.trophies_svg(profile)
         self.assertIn('Profile Milestones', svg)
+        self.assertIn('width="960"', svg)
+        self.assertIn('viewBox="0 0 960 320"', svg)
+        self.assertIn('Public repos', svg)
+        self.assertIn('Followers', svg)
         self.assertIn('Authored PRs', svg)
-        self.assertIn('40', svg)
-        self.assertIn('active since 1 year', svg)
+        self.assertIn('Total stars', svg)
+        self.assertIn('Closed issues', svg)
+        self.assertIn('Years active', svg)
+        self.assertNotIn('Longest streak', svg)
+        self.assertNotIn('Active days', svg)
+        self.assertNotIn('Current streak', svg)
+        ET.fromstring(svg)
 
     def test_pinned_repos_svg_includes_repository_metadata(self):
         svg = module.pinned_repos_svg(
@@ -136,10 +179,12 @@ class SvgRenderingTests(unittest.TestCase):
             ]
         )
         self.assertIn('Featured Repositories', svg)
+        self.assertIn('width="960"', svg)
         self.assertIn('BAC-Mammography-Detection-CVD', svg)
         self.assertIn('Primary language: Jupyter Notebook • 90.0% of tracked bytes', svg)
         self.assertIn('Python 10.0%', svg)
         self.assertIn('clipPath id="lang-clip-0"', svg)
+        ET.fromstring(svg)
 
     def test_pinned_repos_svg_stacks_multiple_cards_and_grows_height(self):
         repositories = [
@@ -161,9 +206,56 @@ class SvgRenderingTests(unittest.TestCase):
             },
         ]
         svg = module.pinned_repos_svg(repositories)
-        self.assertIn('height="630"', svg)
+        self.assertIn('height="636"', svg)
+        self.assertIn('viewBox="0 0 960 636"', svg)
         self.assertIn('enricocastrechini/BAC-Mammography-Detection-CVD', svg)
         self.assertIn('enricocastrechini/enricocastrechini', svg)
+        ET.fromstring(svg)
+
+    def test_write_assets_uses_updated_trophies_signature(self):
+        contrib = {
+            'total': 40,
+            'current_streak': 3,
+            'longest_streak': 7,
+            'active_days': 12,
+            'peak_day': 5,
+            'best_end': module.date(2026, 9, 10),
+            'current_longest_is_ongoing': False,
+            'range_label': '2025-09-18 → 2026-09-17',
+            'days': [
+                (module.date(2026, 9, 15), 1),
+                (module.date(2026, 9, 16), 2),
+                (module.date(2026, 9, 17), 0),
+            ],
+        }
+        profile = {
+            'followers': 1,
+            'public_repos': 2,
+            'total_stars': 4,
+            'merged_prs': 3,
+            'closed_issues': 5,
+            'years_active': 1,
+        }
+        pinned = [
+            {
+                'full_name': 'enricocastrechini/example',
+                'description': 'Example repository used to validate asset writing.',
+                'language': 'Python',
+                'language_breakdown': {'Python': 700, 'HTML': 300},
+                'stargazers_count': 1,
+                'forks_count': 2,
+            }
+        ]
+        with tempfile.TemporaryDirectory() as tmpdir:
+            original_out = module.OUT
+            module.OUT = pathlib.Path(tmpdir)
+            try:
+                module.write_assets(contrib, profile, pinned)
+                trophies_path = pathlib.Path(tmpdir) / 'trophies.svg'
+                self.assertTrue(trophies_path.exists())
+                self.assertIn('Profile Milestones', trophies_path.read_text(encoding='utf-8'))
+            finally:
+                module.OUT = original_out
 
 
 if __name__ == '__main__':
