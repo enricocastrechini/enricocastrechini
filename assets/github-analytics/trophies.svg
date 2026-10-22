@@ -33,7 +33,7 @@
 <rect x="208" y="200" width="168" height="92" rx="14" fill="#24283b" stroke="#2f3549"/>
 <circle cx="232" cy="224" r="8" fill="#e0af68"/>
 <text x="248" y="229" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="600" text-anchor="start">Followers</text>
-<text x="226" y="260" fill="#e0af68" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700" text-anchor="start">1</text>
+<text x="226" y="260" fill="#e0af68" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700" text-anchor="start">2</text>
 <text x="226" y="280" fill="#565f89" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" text-anchor="start">GitHub audience</text>
 <rect x="392" y="200" width="168" height="92" rx="14" fill="#24283b" stroke="#2f3549"/>
 <circle cx="416" cy="224" r="8" fill="#9ece6a"/>
