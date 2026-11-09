@@ -44,19 +44,19 @@ I work at the intersection of **Artificial Intelligence**, **engineering**, and 
 
 <p align="center">
   <img src="./assets/github-analytics/overview.svg" width="49%" alt="GitHub stats overview"/>
-  <img src="./assets/github-analytics/streak.svg" width="49%" alt="GitHub streak stats snapshot"/>
+  <img src="./assets/github-analytics/streak.svg" width="100%" alt="GitHub streak stats snapshot"/>
 </p>
 
 <p align="center">
   <img src="./assets/github-analytics/languages.svg" width="49%" alt="Top languages snapshot"/>
-  <img src="./assets/github-analytics/activity.svg" width="49%" alt="Contribution activity calendar snapshot"/>
+  <img src="./assets/github-analytics/activity.svg" width="100%" alt="Contribution activity calendar snapshot"/>
 </p>
 
 <details>
 <summary>🏆 GitHub Trophies</summary>
 <br>
 <p align="center">
-  <img src="./assets/github-analytics/trophies.svg" alt="GitHub trophies"/>
+  <img src="./assets/github-analytics/trophies.svg" width="100%" alt="GitHub trophies"/>
 </p>
 </details>
 -->
@@ -84,7 +84,7 @@ I work at the intersection of **Artificial Intelligence**, **engineering**, and 
 ## 🚀 Featured Projects
 
 <p align="center">
-  <img src="./assets/github-analytics/pinned-repos.svg" alt="Featured repositories"/>
+  <img src="./assets/github-analytics/pinned-repos.svg" width="100%" alt="Featured repositories"/>
 </p>
 
 <!-- Extend the PINNED_REPOS list in .github/scripts/generate_github_analytics.py
